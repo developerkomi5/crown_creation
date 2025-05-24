@@ -9,7 +9,9 @@ class KVerticalImageText extends StatelessWidget {
     required this.image,
     required this.title,
     this.textColor = KColors.black,
-    this.backgroundColor = KColors.white,
+    this.backgroundColor =
+        KColors
+            .white, //remove Colors.white if homescreen icon is not appeared in dark mode
     this.onTap,
   });
 

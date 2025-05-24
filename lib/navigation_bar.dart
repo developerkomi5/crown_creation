@@ -1,5 +1,6 @@
 import 'package:crowncreation/features/shop/screens/categories/category.dart';
 import 'package:crowncreation/features/shop/screens/home/home.dart';
+import 'package:crowncreation/features/shop/screens/wishlist/wishlist.dart';
 import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class NavigationController extends GetxController {
   final screens = [
     const HomeScreen(),
     const CategoryScreen(),
-    Container(color: Colors.orange),
+    const WishlistScreen(),
     Container(color: Colors.blue),
   ];
 }
