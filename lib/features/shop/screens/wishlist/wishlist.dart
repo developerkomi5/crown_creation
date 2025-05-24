@@ -4,6 +4,7 @@ import 'package:crowncreation/common/widgets/layouts/grid_layout.dart';
 import 'package:crowncreation/common/widgets/products/products_card/product_card_vertical.dart';
 import 'package:crowncreation/features/shop/screens/home/home.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
+import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';

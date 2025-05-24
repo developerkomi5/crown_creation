@@ -46,7 +46,10 @@ class KSearchContainer extends StatelessWidget {
             children: [
               Icon(icon, color: KColors.darkerGrey),
               const SizedBox(width: KSizes.spaceBtwItems),
-              Text(text, style: const TextStyle(color: Colors.black)),
+              Text(
+                text,
+                style: TextStyle(color: dark ? KColors.light : KColors.dark),
+              ),
             ],
           ),
         ),

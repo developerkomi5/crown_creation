@@ -11,32 +11,30 @@ class KPrimaryHeaderContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return KCurvedEdgeWidget(
-      child: SizedBox(
-        height: 400,
-        child: Container(
-          color: KColors.primary,
+      child: Container(
+        color: KColors.primary,
 
-          // size.isFinite: is not true error occured!
-          child: Stack(
-            children: [
-              child,
-              // Background custom Shapes
-              Positioned(
-                top: -150,
-                right: -250,
-                child: KCircularContainer(
-                  backgroundColor: KColors.textWhite.withOpacity(0.1),
-                ),
+        // size.isFinite: is not true error occured!
+        child: Stack(
+          children: [
+            child,
+            // Background custom Shapes
+            Positioned(
+              top: -150,
+              right: -250,
+              child: KCircularContainer(
+                backgroundColor: KColors.textWhite.withOpacity(0.1),
               ),
-              Positioned(
-                top: 100,
-                right: -300,
-                child: KCircularContainer(
-                  backgroundColor: KColors.textWhite.withOpacity(0.1),
-                ),
+            ),
+            Positioned(
+              top: 100,
+              right: -300,
+              child: KCircularContainer(
+                backgroundColor: KColors.textWhite.withOpacity(0.1),
               ),
-            ],
-          ),
+            ),
+            child,
+          ],
         ),
       ),
     );
