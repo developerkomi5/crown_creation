@@ -16,7 +16,6 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = KHelperFunctions.isDarkMode(context);
     return DefaultTabController(
       length: 9,
       child: Scaffold(
