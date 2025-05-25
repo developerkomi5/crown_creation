@@ -1,4 +1,5 @@
 import 'package:crowncreation/features/shop/screens/product_details/widgets/product_detail_image_slider.dart';
+import 'package:crowncreation/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:crowncreation/features/shop/screens/product_details/widgets/rating_share_widget.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class ProductDetail extends StatelessWidget {
                   KRatingAndShare(),
 
                   // Price, Title, Stock & Category
+                  KProductMetaData(),
 
                   // Attributes
                   // Checkout Button
