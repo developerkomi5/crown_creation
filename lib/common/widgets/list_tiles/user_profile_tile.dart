@@ -23,18 +23,18 @@ class KUserProfileTile extends StatelessWidget {
       title: Text(
         'Crown creation',
         style: Theme.of(context).textTheme.headlineSmall!.apply(
-          color: dark ? KColors.light : KColors.dark,
+          color: dark ? KColors.dark : KColors.dark,
         ),
       ),
       subtitle: Text(
         'crowncreation.info@gmail.com',
         style: Theme.of(context).textTheme.bodyMedium!.apply(
-          color: dark ? KColors.light : KColors.dark,
+          color: dark ? KColors.dark : KColors.dark,
         ),
       ),
       trailing: IconButton(
         onPressed: onPressed,
-        icon: Icon(Iconsax.edit, color: dark ? KColors.light : KColors.dark),
+        icon: Icon(Iconsax.edit, color: dark ? KColors.dark : KColors.dark),
       ),
     );
   }

@@ -40,7 +40,7 @@ class KSearchContainer extends StatelessWidget {
                         : KColors.light
                     : Colors.transparent,
             borderRadius: BorderRadius.circular(KSizes.cardRadiusLg),
-            border: showBorder ? Border.all(color: Colors.grey) : null,
+            border: showBorder ? Border.all(color: Colors.white) : null,
           ),
           child: Row(
             children: [
@@ -48,7 +48,7 @@ class KSearchContainer extends StatelessWidget {
               const SizedBox(width: KSizes.spaceBtwItems),
               Text(
                 text,
-                style: TextStyle(color: dark ? KColors.light : KColors.dark),
+                style: TextStyle(color: dark ? KColors.dark : KColors.dark),
               ),
             ],
           ),

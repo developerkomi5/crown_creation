@@ -30,7 +30,7 @@ class SettingsScreen extends StatelessWidget {
                     title: Text(
                       'Account',
                       style: Theme.of(context).textTheme.headlineMedium!.apply(
-                        color: dark ? KColors.light : KColors.dark,
+                        color: dark ? KColors.dark : KColors.dark,
                       ),
                     ),
                   ),
