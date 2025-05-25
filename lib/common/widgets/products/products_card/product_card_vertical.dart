@@ -5,11 +5,13 @@ import 'package:crowncreation/common/widgets/images/k_rounded_image.dart';
 import 'package:crowncreation/common/widgets/texts/k_brand_title_text_with_verified_icon.dart';
 import 'package:crowncreation/common/widgets/texts/product_price_text.dart';
 import 'package:crowncreation/common/widgets/texts/product_title_text.dart';
+import 'package:crowncreation/features/shop/screens/product_details/product_detail.dart';
 import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/image_strings.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class KProductCardVertical extends StatelessWidget {
@@ -21,7 +23,7 @@ class KProductCardVertical extends StatelessWidget {
 
     // Container with side padding, color, edges, radius and shadows
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ProductDetail()),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
