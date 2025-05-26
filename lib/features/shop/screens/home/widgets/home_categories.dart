@@ -8,11 +8,13 @@ class KHomeCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 80,
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: 6,
+      height: 90, // Slightly increased height for better spacing
+      child: ListView.separated(
         scrollDirection: Axis.horizontal,
+        itemCount: 6,
+        padding: const EdgeInsets.symmetric(horizontal: 16), // Uniform padding
+        separatorBuilder:
+            (_, __) => const SizedBox(width: 12), // gap between items
         itemBuilder: (_, index) {
           return KVerticalImageText(
             image: KImages.giftsitems,

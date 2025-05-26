@@ -26,7 +26,7 @@ class KSectionHeading extends StatelessWidget {
         Text(
           title,
           style: Theme.of(context).textTheme.headlineSmall!.apply(
-            color: dark ? KColors.dark : KColors.dark,
+            color: textColor ?? (dark ? KColors.dark : KColors.dark),
           ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,

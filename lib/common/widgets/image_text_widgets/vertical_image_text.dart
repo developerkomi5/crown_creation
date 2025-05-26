@@ -50,7 +50,7 @@ class KVerticalImageText extends StatelessWidget {
             // Text
             const SizedBox(height: KSizes.spaceBtwItems / 2),
             SizedBox(
-              width: 55,
+              width: 60,
               child: Text(
                 title,
                 style: Theme.of(

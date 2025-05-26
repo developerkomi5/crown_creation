@@ -52,6 +52,7 @@ class SettingsScreen extends StatelessWidget {
                   // Account settings
                   KSectionHeading(
                     title: 'Account Settings',
+                    textColor: dark ? KColors.white : KColors.dark,
                     showActionButton: false,
                   ),
                   SizedBox(height: KSizes.spaceBtwItems),
@@ -96,6 +97,7 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(height: KSizes.spaceBtwSections),
                   KSectionHeading(
                     title: 'App Settings',
+                    textColor: dark ? KColors.white : KColors.dark,
                     showActionButton: false,
                   ),
                   SizedBox(height: KSizes.spaceBtwItems),

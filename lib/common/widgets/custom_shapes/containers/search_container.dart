@@ -8,6 +8,7 @@ import 'package:iconsax/iconsax.dart';
 class KSearchContainer extends StatelessWidget {
   const KSearchContainer({
     super.key,
+    this.textColor,
     required this.text,
     this.icon = Iconsax.search_normal_1,
     this.showBackground = true,
@@ -17,6 +18,7 @@ class KSearchContainer extends StatelessWidget {
   });
 
   final String text;
+  final Color? textColor;
   final IconData? icon;
   final bool showBackground, showBorder;
   final VoidCallback? onTap;
@@ -40,7 +42,10 @@ class KSearchContainer extends StatelessWidget {
                         : KColors.light
                     : Colors.transparent,
             borderRadius: BorderRadius.circular(KSizes.cardRadiusLg),
-            border: showBorder ? Border.all(color: Colors.white) : null,
+            border:
+                showBorder
+                    ? Border.all(color: dark ? KColors.white : KColors.dark)
+                    : null,
           ),
           child: Row(
             children: [
@@ -48,7 +53,9 @@ class KSearchContainer extends StatelessWidget {
               const SizedBox(width: KSizes.spaceBtwItems),
               Text(
                 text,
-                style: TextStyle(color: dark ? KColors.dark : KColors.dark),
+                style: TextStyle(
+                  color: textColor ?? (dark ? KColors.dark : KColors.dark),
+                ),
               ),
             ],
           ),

@@ -16,6 +16,7 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = KHelperFunctions.isDarkMode(context);
     return DefaultTabController(
       length: 9,
       child: Scaffold(
@@ -48,8 +49,9 @@ class CategoryScreen extends StatelessWidget {
                     children: [
                       // Search Bar
                       const SizedBox(height: KSizes.spaceBtwItems),
-                      const KSearchContainer(
+                      KSearchContainer(
                         text: 'Search in Categories',
+                        textColor: dark ? KColors.white : KColors.dark,
                         showBorder: true,
                         padding: EdgeInsets.zero,
                         showBackground: false,
@@ -59,6 +61,7 @@ class CategoryScreen extends StatelessWidget {
                       // Featured Products
                       KSectionHeading(
                         title: 'Featured Products',
+                        textColor: dark ? KColors.white : KColors.dark,
                         onPressed: () {},
                       ),
                       const SizedBox(height: KSizes.spaceBtwItems / 1.5),

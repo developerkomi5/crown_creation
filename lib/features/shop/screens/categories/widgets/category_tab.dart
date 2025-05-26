@@ -2,8 +2,10 @@ import 'package:crowncreation/common/widgets/categories/category_show_case.dart'
 import 'package:crowncreation/common/widgets/layouts/grid_layout.dart';
 import 'package:crowncreation/common/widgets/products/products_card/product_card_vertical.dart';
 import 'package:crowncreation/common/widgets/texts/section_heading.dart';
+import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/image_strings.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
+import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class KCategoryTab extends StatelessWidget {
@@ -11,6 +13,7 @@ class KCategoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = KHelperFunctions.isDarkMode(context);
     return ListView(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -36,7 +39,11 @@ class KCategoryTab extends StatelessWidget {
               ),
               const SizedBox(height: KSizes.spaceBtwItems),
               // Products
-              KSectionHeading(title: 'You Might Like', onPressed: () {}),
+              KSectionHeading(
+                title: 'You Might Like',
+                onPressed: () {},
+                textColor: dark ? KColors.white : KColors.dark,
+              ),
               const SizedBox(height: KSizes.spaceBtwItems),
 
               //to display the products

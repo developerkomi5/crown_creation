@@ -6,8 +6,10 @@ import 'package:crowncreation/common/widgets/texts/section_heading.dart';
 import 'package:crowncreation/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:crowncreation/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:crowncreation/features/shop/screens/home/widgets/promo_slider.dart';
+import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/image_strings.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
+import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,6 +17,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = KHelperFunctions.isDarkMode(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -70,7 +73,11 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: KSizes.spaceBtwSections),
 
                   // Heading
-                  KSectionHeading(title: 'Popular Products', onPressed: () {}),
+                  KSectionHeading(
+                    title: 'Popular Products',
+                    onPressed: () {},
+                    textColor: dark ? KColors.white : KColors.dark,
+                  ),
                   const SizedBox(height: KSizes.spaceBtwItems),
 
                   // Popular Products
