@@ -11,7 +11,7 @@ class KVerticalImageText extends StatelessWidget {
     this.textColor = KColors.black,
     this.backgroundColor =
         KColors
-            .white, //remove Colors.white if homescreen icon is not appeared in dark mode
+            .white, // remove Colors.white if homescreen icon is not appeared in dark mode
     this.onTap,
   });
 
@@ -50,7 +50,7 @@ class KVerticalImageText extends StatelessWidget {
             // Text
             const SizedBox(height: KSizes.spaceBtwItems / 2),
             SizedBox(
-              width: 60,
+              width: 55,
               child: Text(
                 title,
                 style: Theme.of(
