@@ -3,6 +3,7 @@ import 'package:crowncreation/common/widgets/custom_shapes/containers/primary_he
 import 'package:crowncreation/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:crowncreation/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:crowncreation/common/widgets/texts/section_heading.dart';
+import 'package:crowncreation/features/personalization/screens/address/address.dart';
 import 'package:crowncreation/features/personalization/screens/profile/profile.dart';
 import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
@@ -61,6 +62,7 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.safe_home,
                     title: 'My Addresses',
                     subTitle: 'Set Shopping delivery address',
+                    onTap: () => Get.to(() => const UserAddressScreen()),
                   ),
                   KSettingsMenuTile(
                     icon: Iconsax.shopping_cart,
