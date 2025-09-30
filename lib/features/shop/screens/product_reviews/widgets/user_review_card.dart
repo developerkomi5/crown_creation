@@ -62,7 +62,8 @@ class UserReviewCard extends StatelessWidget {
 
         // Company Review
         KRoundedContainer(
-          backgroundColor: dark ? KColors.darkerGrey : KColors.grey,
+          backgroundColor:
+              dark ? KColors.darkerGrey : KColors.grey.withValues(alpha: 0.4),
           child: Padding(
             padding: const EdgeInsets.all(KSizes.md),
             child: Column(

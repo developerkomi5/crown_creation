@@ -1,5 +1,7 @@
+import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:crowncreation/utils/device/device_utility.dart';
+import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -22,6 +24,7 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = KHelperFunctions.isDarkMode(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: KSizes.md),
       child: AppBar(
@@ -30,7 +33,10 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
             showBackArrorw
                 ? IconButton(
                   onPressed: () => Get.back(),
-                  icon: const Icon(Iconsax.arrow_left),
+                  icon: Icon(
+                    Iconsax.arrow_left,
+                    color: dark ? KColors.white : KColors.black,
+                  ),
                 )
                 : leadingIcon != null
                 ? IconButton(

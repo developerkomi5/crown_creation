@@ -4,7 +4,9 @@ import 'package:crowncreation/features/shop/screens/product_details/widgets/prod
 import 'package:crowncreation/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:crowncreation/features/shop/screens/product_details/widgets/rating_share_widget.dart';
 import 'package:crowncreation/features/shop/screens/product_reviews/product_reviews.dart';
+import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
+import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -16,6 +18,7 @@ class ProductDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = KHelperFunctions.isDarkMode(context);
     return Scaffold(
       bottomNavigationBar: KBottomAddToCart(),
       body: SingleChildScrollView(
@@ -45,14 +48,20 @@ class ProductDetail extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: Text('Checkout'),
+                      child: Text(
+                        'Checkout',
+                        style: TextStyle(
+                          color: dark ? KColors.black : KColors.black,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: KSizes.spaceBtwSections),
 
                   // Description
-                  const KSectionHeading(
+                  KSectionHeading(
                     title: 'Description',
+                    textColor: dark ? KColors.white : KColors.black,
                     showActionButton: false,
                   ),
                   const SizedBox(height: KSizes.spaceBtwItems),
@@ -78,14 +87,19 @@ class ProductDetail extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const KSectionHeading(
+                      KSectionHeading(
                         title: 'Reviews(89)',
+                        textColor: dark ? KColors.white : KColors.black,
                         showActionButton: false,
                       ),
                       IconButton(
                         onPressed:
                             () => Get.to(() => const ProductReviewsScreen()),
-                        icon: const Icon(Iconsax.arrow_right_3, size: 18),
+                        icon: Icon(
+                          Iconsax.arrow_right_3,
+                          size: 18,
+                          color: dark ? KColors.white : KColors.black,
+                        ),
                       ),
                     ],
                   ),
