@@ -46,6 +46,7 @@ class KProductMetaData extends StatelessWidget {
                 decoration: TextDecoration.lineThrough,
               ),
             ),
+            const SizedBox(width: KSizes.sm),
             const KProductPriceText(price: '175', isLarge: true),
             const SizedBox(width: KSizes.spaceBtwItems),
           ],
@@ -61,7 +62,7 @@ class KProductMetaData extends StatelessWidget {
           children: [
             const KProductTitleText(title: 'Status'),
             const SizedBox(width: KSizes.spaceBtwItems),
-            Text('In Stock', style: Theme.of(context).textTheme.titleMedium),
+            Text('In Stock', style: Theme.of(context).textTheme.titleLarge),
           ],
         ),
         const SizedBox(height: KSizes.spaceBtwItems / 1.5),
@@ -75,6 +76,7 @@ class KProductMetaData extends StatelessWidget {
               height: 32,
               overlayColor: dark ? KColors.white : KColors.black,
             ),
+            const SizedBox(width: KSizes.sm),
             const KBrandTitleTextWithVerifiedIcon(
               title: 'Cake Toppers',
               brandTextSize: TextSizes.meduim,

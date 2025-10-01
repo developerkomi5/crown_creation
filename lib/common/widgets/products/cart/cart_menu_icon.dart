@@ -1,5 +1,7 @@
+import 'package:crowncreation/features/shop/screens/cart/cart.dart';
 import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:iconsax/iconsax.dart';
 
 class KCartCounterIcon extends StatelessWidget {
@@ -14,7 +16,7 @@ class KCartCounterIcon extends StatelessWidget {
       children: [
         IconButton(
           icon: Icon(Iconsax.shopping_bag, color: iconColor),
-          onPressed: onPressed,
+          onPressed: () => Get.to(() => const CartScreen()),
         ),
         Positioned(
           right: 0,

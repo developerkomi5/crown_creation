@@ -34,31 +34,35 @@ class KHelperFunctions {
       return Colors.teal;
     } else if (value == 'Indigo') {
       return Colors.indigo;
+    } else if (value == 'Golden') {
+      return Colors.yellow[700];
     } else {
       return null;
     }
   }
 
   static void showSnackBar(String message) {
-    ScaffoldMessenger.of(Get.context!).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    ScaffoldMessenger.of(
+      Get.context!,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   static void showAlert(String title, String message) {
     showDialog(
-        context: Get.context!,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(title),
-            content: Text(message),
-            actions: [
-              TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('OK')),
-            ],
-          );
-        });
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   static void navigateToScreen(BuildContext context, Widget screen) {
@@ -89,8 +93,10 @@ class KHelperFunctions {
     return MediaQuery.of(Get.context!).size.width;
   }
 
-  static String getFormattedDate(DateTime date,
-      {String format = 'dd MMM yyyy'}) {
+  static String getFormattedDate(
+    DateTime date, {
+    String format = 'dd MMM yyyy',
+  }) {
     return DateFormat(format).format(date);
   }
 
@@ -102,7 +108,9 @@ class KHelperFunctions {
     final wrappedList = <Widget>[];
     for (var i = 0; i < widgets.length; i += rowSize) {
       final rowChildren = widgets.sublist(
-          i, i + rowSize > widgets.length ? widgets.length : i + rowSize);
+        i,
+        i + rowSize > widgets.length ? widgets.length : i + rowSize,
+      );
       wrappedList.add(Row(children: rowChildren));
     }
     return wrappedList;

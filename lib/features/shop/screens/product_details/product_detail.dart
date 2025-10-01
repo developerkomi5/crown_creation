@@ -1,5 +1,6 @@
 import 'package:crowncreation/common/widgets/texts/section_heading.dart';
 import 'package:crowncreation/features/shop/screens/product_details/widgets/bottom_add_to_cart_widget.dart';
+import 'package:crowncreation/features/shop/screens/product_details/widgets/product_attributes.dart';
 import 'package:crowncreation/features/shop/screens/product_details/widgets/product_detail_image_slider.dart';
 import 'package:crowncreation/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:crowncreation/features/shop/screens/product_details/widgets/rating_share_widget.dart';
@@ -42,6 +43,9 @@ class ProductDetail extends StatelessWidget {
                   // Price, Title, Stock & Category
                   KProductMetaData(),
                   const SizedBox(height: KSizes.spaceBtwSections),
+
+                  // Attributes
+                  ProductAttributes(),
 
                   // Checkout Button
                   SizedBox(
