@@ -6,6 +6,7 @@ import 'package:crowncreation/common/widgets/texts/section_heading.dart';
 import 'package:crowncreation/features/personalization/screens/address/address.dart';
 import 'package:crowncreation/features/personalization/screens/profile/profile.dart';
 import 'package:crowncreation/features/shop/screens/cart/cart.dart';
+import 'package:crowncreation/features/shop/screens/order/order.dart';
 import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:crowncreation/utils/helpers/helper_functions.dart';
@@ -75,6 +76,7 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.bag_tick,
                     title: 'My Orders',
                     subTitle: 'In-Progress and Completed Orders',
+                    onTap: () => Get.to(() => const OrderScreen()),
                   ),
                   KSettingsMenuTile(
                     icon: Iconsax.bank,

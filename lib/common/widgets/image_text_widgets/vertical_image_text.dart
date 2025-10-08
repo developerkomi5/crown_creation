@@ -14,12 +14,10 @@ class KVerticalImageText extends StatelessWidget {
             .white, // remove Colors.white if homescreen icon is not appeared in dark mode
     this.onTap,
   });
-
   final String image, title;
   final Color textColor;
   final Color? backgroundColor;
   final void Function()? onTap;
-
   @override
   Widget build(BuildContext context) {
     final dark = KHelperFunctions.isDarkMode(context);
