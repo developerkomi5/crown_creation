@@ -5,6 +5,7 @@ import 'package:crowncreation/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:crowncreation/common/widgets/texts/section_heading.dart';
 import 'package:crowncreation/features/personalization/screens/address/address.dart';
 import 'package:crowncreation/features/personalization/screens/profile/profile.dart';
+import 'package:crowncreation/features/shop/screens/cart/cart.dart';
 import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:crowncreation/utils/helpers/helper_functions.dart';
@@ -68,6 +69,7 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.shopping_cart,
                     title: 'My Cart',
                     subTitle: 'Add, remove products and move to checkout',
+                    onTap: () => Get.to(() => const CartScreen()),
                   ),
                   KSettingsMenuTile(
                     icon: Iconsax.bag_tick,

@@ -48,6 +48,7 @@ class KCartItem extends StatelessWidget {
                       text: 'Color',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
+
                     TextSpan(
                       text: 'Black',
                       style: Theme.of(context).textTheme.bodyLarge,

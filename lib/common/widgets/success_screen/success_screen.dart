@@ -3,6 +3,7 @@ import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:crowncreation/utils/constants/text_strings.dart';
 import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({
@@ -26,10 +27,7 @@ class SuccessScreen extends StatelessWidget {
           child: Column(
             children: [
               // Image
-              Image(
-                image: AssetImage(image),
-                width: KHelperFunctions.screenWidth() * 0.6,
-              ),
+              Lottie.asset(image, fit: BoxFit.fill),
               const SizedBox(height: KSizes.spaceBtwSections),
 
               // Title & Subtitle

@@ -1,9 +1,10 @@
 import 'package:crowncreation/common/widgets/appbar/appbar.dart';
-import 'package:crowncreation/common/widgets/products/cart/add_remove_button.dart';
-import 'package:crowncreation/common/widgets/products/cart/cart_item.dart';
-import 'package:crowncreation/common/widgets/texts/product_price_text.dart';
+import 'package:crowncreation/features/shop/screens/cart/widgets/cart_items.dart';
+import 'package:crowncreation/features/shop/screens/checkout/checkout.dart';
+import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -17,41 +18,20 @@ class CartScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(KSizes.defaultSpace),
-        child: ListView.separated(
-          shrinkWrap: true,
-          itemCount: 10,
-          separatorBuilder:
-              (_, __) => const SizedBox(height: KSizes.spaceBtwSections),
-          itemBuilder:
-              (_, index) => Column(
-                children: [
-                  const KCartItem(),
-                  const SizedBox(height: KSizes.spaceBtwItems),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          // Extra Space
-                          SizedBox(width: 70),
-                          // Add Remove Buttons
-                          KProductQuantityWithAddRemoveButton(),
-                        ],
-                      ),
-                      KProductPriceText(price: '175'),
-                    ],
-                  ),
-                ],
-              ),
-        ),
+        // items in cart
+        child: KCartItems(),
       ),
 
+      // Checkout Button
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(KSizes.defaultSpace),
         child: ElevatedButton(
-          onPressed: () {},
-          child: const Text('Checkout \₹256.0'),
+          onPressed: () => Get.to(() => const CheckoutScreen()),
+          child: const Text(
+            'Checkout \₹256.0',
+            style: TextStyle(color: KColors.black),
+          ),
         ),
       ),
     );
