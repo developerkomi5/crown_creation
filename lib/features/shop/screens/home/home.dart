@@ -3,6 +3,7 @@ import 'package:crowncreation/common/widgets/custom_shapes/containers/search_con
 import 'package:crowncreation/common/widgets/layouts/grid_layout.dart';
 import 'package:crowncreation/common/widgets/products/products_card/product_card_vertical.dart';
 import 'package:crowncreation/common/widgets/texts/section_heading.dart';
+import 'package:crowncreation/features/shop/screens/all_products/all_products.dart';
 import 'package:crowncreation/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:crowncreation/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:crowncreation/features/shop/screens/home/widgets/promo_slider.dart';
@@ -11,6 +12,8 @@ import 'package:crowncreation/utils/constants/image_strings.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -75,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                   // Heading
                   KSectionHeading(
                     title: 'Popular Products',
-                    onPressed: () {},
+                    onPressed: () => Get.to(() => const AllProducts()),
                     textColor: dark ? KColors.white : KColors.dark,
                   ),
                   const SizedBox(height: KSizes.spaceBtwItems),

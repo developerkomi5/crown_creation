@@ -6,10 +6,12 @@ import 'package:crowncreation/common/widgets/layouts/grid_layout.dart';
 import 'package:crowncreation/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:crowncreation/common/widgets/texts/section_heading.dart';
 import 'package:crowncreation/features/shop/screens/categories/widgets/category_tab.dart';
+import 'package:crowncreation/features/shop/screens/category/category_products.dart';
 import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -62,7 +64,7 @@ class CategoryScreen extends StatelessWidget {
                       KSectionHeading(
                         title: 'Featured Products',
                         textColor: dark ? KColors.white : KColors.dark,
-                        onPressed: () {},
+                        onPressed: () => Get.to(() => const CategoryProducts()),
                       ),
                       const SizedBox(height: KSizes.spaceBtwItems / 1.5),
 

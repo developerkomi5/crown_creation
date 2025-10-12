@@ -18,7 +18,7 @@ class KCategoryTypeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = KHelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       // Container Design
       child: KRoundedContainer(
         padding: const EdgeInsets.all(KSizes.sm),
