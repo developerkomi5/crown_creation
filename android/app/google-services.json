@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "458345126735",
+    "project_id": "crowncreation-359d1",
+    "storage_bucket": "crowncreation-359d1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458345126735:android:c3ca3d6191c26299cd433a",
+        "android_client_info": {
+          "package_name": "com.example.crowncreation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458345126735-q48nng7plb28dbors1ucaqc79ql29ebv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.crowncreation",
+            "certificate_hash": "dc9ba652a1bb26498cbc3ea139b704057f8e05c5"
+          }
+        },
+        {
+          "client_id": "458345126735-077fhec7lkrs9ohhops477pit3h87ii7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBISUjomNqZLNGLey7vX_NU5oXzTKZuMbk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458345126735-077fhec7lkrs9ohhops477pit3h87ii7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "458345126735-lljt2399q7ckle4fn18b0i60mlugvk5n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.crowncreation"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-import 'package:crowncreation/features/authentication/screens/onboarding/onboarding.dart';
+import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +15,10 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: KAppTheme.lightTheme,
       darkTheme: KAppTheme.darkTheme,
-      home: const OnBoardingScreen(),
+      home: const Scaffold(
+        backgroundColor: KColors.primary,
+        body: Center(child: CircularProgressIndicator(color: Colors.black)),
+      ),
     );
   }
 }

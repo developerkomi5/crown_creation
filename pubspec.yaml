@@ -39,6 +39,9 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   lottie: ^3.3.2
 
+  # firebase
+  firebase_core: ^4.2.0
+
 
 
 
