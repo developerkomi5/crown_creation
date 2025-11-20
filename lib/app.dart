@@ -1,3 +1,4 @@
+import 'package:crowncreation/bindings/general_bindings.dart';
 import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: KAppTheme.lightTheme,
       darkTheme: KAppTheme.darkTheme,
+      initialBinding: GeneralBindings(),
       home: const Scaffold(
         backgroundColor: KColors.primary,
         body: Center(child: CircularProgressIndicator(color: Colors.black)),
