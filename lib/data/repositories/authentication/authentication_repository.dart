@@ -1,5 +1,7 @@
 import 'package:crowncreation/features/authentication/screens/login/login.dart';
 import 'package:crowncreation/features/authentication/screens/onboarding/onboarding.dart';
+import 'package:crowncreation/features/authentication/screens/signup/verify_email.dart';
+import 'package:crowncreation/navigation_bar.dart';
 import 'package:crowncreation/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:crowncreation/utils/exceptions/firebase_exceptions.dart';
 import 'package:crowncreation/utils/exceptions/format_exceptions.dart';
@@ -27,16 +29,25 @@ class AuthenticationRepository extends GetxController {
 
   // function to show relevant screen
   screenRedirect() async {
-    // Local Storage
-    if (kDebugMode) {
-      print('================ GET STORAGE AUTH REPO ================');
-      print(deviceStorage.read('IsFirstTime'));
-    }
+    final user = _auth.currentUser;
+    if (user != null) {
+      if (user.emailVerified) {
+        Get.offAll(() => const NavigationBarScreen());
+      } else {
+        Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
+      }
+    } else {
+      // Local Storage
+      if (kDebugMode) {
+        print('================ GET STORAGE AUTH REPO ================');
+        print(deviceStorage.read('IsFirstTime'));
+      }
 
-    deviceStorage.writeIfNull('IsFirstTime', true);
-    deviceStorage.read('IsFirstTime') != true
-        ? Get.offAll(() => const LoginScreen())
-        : Get.offAll(const OnBoardingScreen());
+      deviceStorage.writeIfNull('IsFirstTime', true);
+      deviceStorage.read('IsFirstTime') != true
+          ? Get.offAll(() => const LoginScreen())
+          : Get.offAll(const OnBoardingScreen());
+    }
   }
 
   // email & password signin
@@ -96,6 +107,22 @@ class AuthenticationRepository extends GetxController {
   // ./end Federated identity & social signin
 
   // [LogoutUser] - Valid for any authentication
+  Future<void> logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Get.offAll(() => const LoginScreen());
+    } on FirebaseAuthException catch (e) {
+      throw KFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw KFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const KFormatException();
+    } on PlatformException catch (e) {
+      throw KPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
 
   // Delete User - Remove user auth and firestore account
 }

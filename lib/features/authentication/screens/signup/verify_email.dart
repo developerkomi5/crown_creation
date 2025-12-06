@@ -1,6 +1,5 @@
-import 'package:crowncreation/common/widgets/success_screen/success_screen.dart';
-import 'package:crowncreation/features/authentication/screens/login/login.dart';
-import 'package:crowncreation/navigation_bar.dart';
+import 'package:crowncreation/data/repositories/authentication/authentication_repository.dart';
+import 'package:crowncreation/features/authentication/controllers/signup/verify_email_controller.dart';
 import 'package:crowncreation/utils/constants/image_strings.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:crowncreation/utils/constants/text_strings.dart';
@@ -10,17 +9,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({super.key});
+  const VerifyEmailScreen({super.key, this.email});
+
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(VerifyEmailController());
     final dark = KHelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: () => Get.offAll(() => const LoginScreen()),
+            onPressed: () => AuthenticationRepository.instance.logout(),
             icon: const Icon(CupertinoIcons.clear),
           ),
         ],
@@ -46,7 +48,7 @@ class VerifyEmailScreen extends StatelessWidget {
               ),
               const SizedBox(height: KSizes.spaceBtwItems),
               Text(
-                'crowncreation.info@gmail.com',
+                email ?? '',
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -62,16 +64,7 @@ class VerifyEmailScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed:
-                      () => Get.to(
-                        () => SuccessScreen(
-                          image: KImages.staticSuccessIllustration,
-                          title: KTexts.yourAccountCreatedTitle,
-                          subTitle: KTexts.yourAccountCreatedSubTitle,
-                          onPressed:
-                              () => Get.to(() => const NavigationBarScreen()),
-                        ),
-                      ),
+                  onPressed: () => controller.checkEmailVerificationStatus(),
                   child: Text(
                     KTexts.kContinue,
                     style: TextStyle(color: dark ? Colors.black : Colors.black),
@@ -82,7 +75,7 @@ class VerifyEmailScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => controller.sendEmailVerification(),
                   child: const Text(KTexts.resendEmail),
                 ),
               ),

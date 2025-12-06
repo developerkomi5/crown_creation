@@ -1,4 +1,4 @@
-import 'package:crowncreation/features/authentication/controllers/network_manager/network_manager.dart';
+import 'package:crowncreation/utils/helpers/network_manager.dart';
 import 'package:get/get.dart';
 
 class GeneralBindings extends Bindings {

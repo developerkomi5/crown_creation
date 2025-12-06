@@ -35,10 +35,14 @@ class KImages {
       "assets/images/animations/sammy-line-man-receives-a-mail.png";
   static const String verifyIllustration =
       "assets/images/animations/sammy-line-travel-backpack-with-passport-and-air-ticket.gif";
+
+  // Lottie Animation
   static const String paymentSuccessIllustration =
       "assets/images/animations/Successful.json";
   static const String loadingAnimation =
       "assets/images/animations/loaderinfo.json";
+  static const String successfullyRegisterAnimation =
+      'assets/images/animations/success circle check.json';
 
   // Category Icons
   static const String weddingdecor = "assets/icons/categories/weddingdecor.png";

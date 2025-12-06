@@ -1,9 +1,9 @@
 import 'package:crowncreation/data/repositories/authentication/authentication_repository.dart';
 import 'package:crowncreation/data/repositories/user/user_repository.dart';
-import 'package:crowncreation/features/authentication/controllers/network_manager/network_manager.dart';
 import 'package:crowncreation/features/authentication/screens/signup/verify_email.dart';
 import 'package:crowncreation/features/personalization/models/user_model.dart';
 import 'package:crowncreation/utils/constants/image_strings.dart';
+import 'package:crowncreation/utils/helpers/network_manager.dart';
 import 'package:crowncreation/utils/popups/full_screen_loader.dart';
 import 'package:crowncreation/utils/popups/loaders.dart';
 import 'package:flutter/widgets.dart';
@@ -79,7 +79,7 @@ class SignupController extends GetxController {
       );
 
       // Move to Verify Email Screen
-      Get.to(() => const VerifyEmailScreen());
+      Get.to(() => VerifyEmailScreen(email: email.text.trim()));
     } catch (e) {
       // remove Loader
       KFullScreenLoader.stopLoading();

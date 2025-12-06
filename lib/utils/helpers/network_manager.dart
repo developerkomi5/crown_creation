@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:crowncreation/utils/popups/loaders.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +8,7 @@ class NetworkManager extends GetxController {
   static NetworkManager get instance => Get.find();
 
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
   final Rx<ConnectivityResult> _connectionStatus = ConnectivityResult.none.obs;
 
   // initialize the network manager and set up a stream to continually check the connection status.
@@ -22,8 +21,9 @@ class NetworkManager extends GetxController {
   }
 
   // update the connection status based on changes in connectivity and show a relevant popup for no internet connection.
-  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
-    _connectionStatus.value = result;
+  void _updateConnectionStatus(List<ConnectivityResult> results) {
+    final status = results.isNotEmpty ? results.first : ConnectivityResult.none;
+    _connectionStatus.value = status;
     if (_connectionStatus.value == ConnectivityResult.none) {
       KLoaders.warningSnackBar(title: 'No Internet Connection');
     }
