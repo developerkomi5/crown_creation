@@ -1,7 +1,8 @@
-import 'package:crowncreation/features/authentication/screens/password_configuration/reset_password.dart';
+import 'package:crowncreation/features/authentication/controllers/forget_password/forget_password_controller.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:crowncreation/utils/constants/text_strings.dart';
 import 'package:crowncreation/utils/helpers/helper_functions.dart';
+import 'package:crowncreation/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -11,6 +12,7 @@ class ForgetPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ForgetPasswordController());
     final dark = KHelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: AppBar(),
@@ -32,10 +34,15 @@ class ForgetPassword extends StatelessWidget {
             const SizedBox(height: KSizes.spaceBtwSections * 2),
 
             // Text Field
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: KTexts.email,
-                prefixIcon: Icon(Iconsax.direct_right),
+            Form(
+              key: controller.forgetPasswordFormKey,
+              child: TextFormField(
+                controller: controller.email,
+                validator: KValidator.validateEmail,
+                decoration: const InputDecoration(
+                  labelText: KTexts.email,
+                  prefixIcon: Icon(Iconsax.direct_right),
+                ),
               ),
             ),
             const SizedBox(height: KSizes.spaceBtwSections),
@@ -44,7 +51,7 @@ class ForgetPassword extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Get.off(() => const ResetPasswordScreen()),
+                onPressed: () => controller.sendPasswordResetEmail(),
                 child: Text(
                   KTexts.submit,
                   style: TextStyle(color: dark ? Colors.black : Colors.black),

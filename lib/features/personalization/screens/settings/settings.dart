@@ -3,6 +3,7 @@ import 'package:crowncreation/common/widgets/custom_shapes/containers/primary_he
 import 'package:crowncreation/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:crowncreation/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:crowncreation/common/widgets/texts/section_heading.dart';
+import 'package:crowncreation/features/authentication/screens/login/login.dart';
 import 'package:crowncreation/features/personalization/screens/address/address.dart';
 import 'package:crowncreation/features/personalization/screens/profile/profile.dart';
 import 'package:crowncreation/features/shop/screens/cart/cart.dart';
@@ -136,7 +137,7 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () => Get.to(() => LoginScreen()),
                       child: const Text('Logout'),
                     ),
                   ),
