@@ -1,7 +1,9 @@
 import 'package:crowncreation/common/widgets/appbar/appbar.dart';
 import 'package:crowncreation/features/personalization/controllers/update_name_controller.dart';
+import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:crowncreation/utils/constants/text_strings.dart';
+import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:crowncreation/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +14,7 @@ class ChangeName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = KHelperFunctions.isDarkMode(context);
     final controller = Get.put(UpdateNameController());
     return Scaffold(
       // Custom Appbar
@@ -46,6 +49,18 @@ class ChangeName extends StatelessWidget {
                             KValidator.validateEmptyText('First name', value),
                     expands: false,
                     decoration: const InputDecoration(
+                      labelText: KTexts.firstName,
+                      prefixIcon: Icon(Iconsax.user),
+                    ),
+                  ),
+                  const SizedBox(height: KSizes.spaceBtwInputFields),
+                  TextFormField(
+                    controller: controller.lastName,
+                    validator:
+                        (value) =>
+                            KValidator.validateEmptyText('Last name', value),
+                    expands: false,
+                    decoration: const InputDecoration(
                       labelText: KTexts.lastName,
                       prefixIcon: Icon(Iconsax.user),
                     ),
@@ -60,7 +75,10 @@ class ChangeName extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () => controller.updateUserName(),
-                child: const Text('Save'),
+                child: Text(
+                  'Save',
+                  style: TextStyle(color: dark ? KColors.white : KColors.black),
+                ),
               ),
             ),
           ],

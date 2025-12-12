@@ -169,6 +169,11 @@ class AuthenticationRepository extends GetxController {
   // [GoogleAuthentication] - Google
   Future<UserCredential?> signInWithGoogle() async {
     try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+
+      // Force account chooser to show every time
+      await googleSignIn.signOut();
+
       // Trigger the authentication flow
       final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
