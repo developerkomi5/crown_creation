@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crowncreation/data/repositories/authentication/authentication_repository.dart';
 import 'package:crowncreation/features/personalization/models/user_model.dart';
 import 'package:crowncreation/utils/exceptions/firebase_exceptions.dart';
 import 'package:crowncreation/utils/exceptions/format_exceptions.dart';
@@ -28,6 +29,74 @@ class UserRepository extends GetxController {
   }
 
   // function to fetch user details based on user ID.
+  Future<UserModel> fetchUserDetails() async {
+    try {
+      final documentSnapshot =
+          await _db
+              .collection("Users")
+              .doc(AuthenticationRepository.instance.authUser?.uid)
+              .get();
+      if (documentSnapshot.exists) {
+        return UserModel.fromSnapshot(documentSnapshot);
+      } else {
+        return UserModel.empty();
+      }
+    } on FirebaseException catch (e) {
+      throw KFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const KFormatException();
+    } on PlatformException catch (e) {
+      throw KPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
 
   // function to update user data in firestore.
+  Future<void> updateUserDetails(UserModel updatedUser) async {
+    try {
+      await _db
+          .collection("Users")
+          .doc(updatedUser.id)
+          .update(updatedUser.toJson());
+    } on FirebaseException catch (e) {
+      throw KFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const KFormatException();
+    } on PlatformException catch (e) {
+      throw KPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
+
+  // update any field in specific users collection
+  Future<void> updateSingleField(Map<String, dynamic> json) async {
+    try {
+      await _db.collection("Users").doc().update(json);
+    } on FirebaseException catch (e) {
+      throw KFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const KFormatException();
+    } on PlatformException catch (e) {
+      throw KPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
+
+  // function to remove user data from firestore
+  Future<void> removeUserRecord(String userId) async {
+    try {
+      await _db.collection("Users").doc(userId).delete();
+    } on FirebaseException catch (e) {
+      throw KFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const KFormatException();
+    } on PlatformException catch (e) {
+      throw KPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
 }

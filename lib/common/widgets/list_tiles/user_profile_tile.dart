@@ -1,4 +1,5 @@
 import 'package:crowncreation/common/widgets/images/k_circular_image.dart';
+import 'package:crowncreation/features/personalization/controllers/user_controller.dart';
 import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/image_strings.dart';
 import 'package:crowncreation/utils/helpers/helper_functions.dart';
@@ -12,6 +13,7 @@ class KUserProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     final dark = KHelperFunctions.isDarkMode(context);
     return ListTile(
       leading: const KCircularImage(
@@ -21,13 +23,13 @@ class KUserProfileTile extends StatelessWidget {
         padding: 0,
       ),
       title: Text(
-        'Crown creation',
+        controller.user.value.fullName,
         style: Theme.of(context).textTheme.headlineSmall!.apply(
           color: dark ? KColors.dark : KColors.dark,
         ),
       ),
       subtitle: Text(
-        'crowncreation.info@gmail.com',
+        controller.user.value.email,
         style: Theme.of(context).textTheme.bodyMedium!.apply(
           color: dark ? KColors.dark : KColors.dark,
         ),

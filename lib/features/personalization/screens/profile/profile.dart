@@ -1,10 +1,14 @@
 import 'package:crowncreation/common/widgets/appbar/appbar.dart';
 import 'package:crowncreation/common/widgets/images/k_circular_image.dart';
 import 'package:crowncreation/common/widgets/texts/section_heading.dart';
+import 'package:crowncreation/features/personalization/controllers/user_controller.dart';
 import 'package:crowncreation/features/personalization/screens/profile/widgets/profile_menu.dart';
+import 'package:crowncreation/features/personalization/screens/profile/widgets/change_name.dart';
 import 'package:crowncreation/utils/constants/image_strings.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -12,6 +16,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return Scaffold(
       appBar: KAppBar(showBackArrorw: true, title: Text('Profile')),
       // Body
@@ -51,14 +56,14 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: KSizes.spaceBtwItems),
 
               KProfileMenu(
-                onPressed: () {},
+                onPressed: () => Get.to(() => const ChangeName()),
                 title: 'Name',
-                value: 'Crown Creation',
+                value: controller.user.value.fullName,
               ),
               KProfileMenu(
                 onPressed: () {},
                 title: 'Username',
-                value: 'crown_creation',
+                value: controller.user.value.username,
               ),
 
               const SizedBox(height: KSizes.spaceBtwItems),
@@ -75,18 +80,18 @@ class ProfileScreen extends StatelessWidget {
               KProfileMenu(
                 onPressed: () {},
                 title: 'User ID',
-                value: '45689',
+                value: controller.user.value.id,
                 icon: Iconsax.copy,
               ),
               KProfileMenu(
                 onPressed: () {},
                 title: 'E-Mail',
-                value: 'crowncreation.info@gmail.com',
+                value: controller.user.value.email,
               ),
               KProfileMenu(
                 onPressed: () {},
                 title: 'Phone Number',
-                value: '+91 84013 60600',
+                value: controller.user.value.phoneNumber,
               ),
               KProfileMenu(onPressed: () {}, title: 'Gender', value: 'Male'),
               KProfileMenu(
@@ -99,7 +104,7 @@ class ProfileScreen extends StatelessWidget {
 
               Center(
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => controller.deleteAccountWarningPopup(),
                   child: const Text(
                     'Close Account',
                     style: TextStyle(color: Colors.red),

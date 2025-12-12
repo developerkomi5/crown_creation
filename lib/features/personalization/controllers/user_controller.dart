@@ -1,13 +1,47 @@
+import 'package:crowncreation/data/repositories/authentication/authentication_repository.dart';
 import 'package:crowncreation/data/repositories/user/user_repository.dart';
+import 'package:crowncreation/features/authentication/screens/login/login.dart';
 import 'package:crowncreation/features/personalization/models/user_model.dart';
+import 'package:crowncreation/features/personalization/screens/profile/widgets/re_authenticate_user_login_form.dart';
+import 'package:crowncreation/utils/constants/image_strings.dart';
+import 'package:crowncreation/utils/constants/sizes.dart';
+import 'package:crowncreation/utils/helpers/network_manager.dart';
+import 'package:crowncreation/utils/popups/full_screen_loader.dart';
 import 'package:crowncreation/utils/popups/loaders.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
   static UserController get instance => Get.find();
 
+  final profileLoading = false.obs;
+  Rx<UserModel> user = UserModel.empty().obs;
+
+  final hidePassword = false.obs;
+  final verifyEmail = TextEditingController();
+  final verifyPassword = TextEditingController();
   final userRepository = Get.put(UserRepository());
+  GlobalKey<FormState> reAuthFormKey = GlobalKey<FormState>();
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchUserRecord();
+  }
+
+  // fetch user record
+  Future<void> fetchUserRecord() async {
+    try {
+      profileLoading.value = true;
+      final user = await userRepository.fetchUserDetails();
+      this.user(user);
+    } catch (e) {
+      user(UserModel.empty());
+    } finally {
+      profileLoading.value = false;
+    }
+  }
 
   // Save user record from any registration provider
   Future<void> saveUserRecord(UserCredential? userCredentials) async {
@@ -41,6 +75,95 @@ class UserController extends GetxController {
         message:
             'Something went wrong while saving your information. You can re-save your data in your profile.',
       );
+    }
+  }
+
+  // Delete account warning
+  void deleteAccountWarningPopup() {
+    Get.defaultDialog(
+      contentPadding: const EdgeInsets.all(KSizes.md),
+      title: 'Delete Account',
+      middleText:
+          'Are you sure you want to delete your account premanently? This action is not reversible and all your data will be removed permenently.',
+      confirm: ElevatedButton(
+        onPressed: () async => deleteUserAccount(),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+          side: const BorderSide(color: Colors.red),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: KSizes.lg),
+          child: Text('Delete'),
+        ),
+      ),
+      cancel: OutlinedButton(
+        onPressed: () => Navigator.of(Get.overlayContext!).pop(),
+        child: const Text('Cancel'),
+      ),
+    );
+  }
+
+  // Delete user account
+  void deleteUserAccount() async {
+    try {
+      KFullScreenLoader.openLoadingDialog(
+        'Processing',
+        KImages.loadingAnimation,
+      );
+
+      // first re-authenticate user
+      final auth = AuthenticationRepository.instance;
+      final provider =
+          auth.authUser!.providerData.map((e) => e.providerId).first;
+      if (provider.isNotEmpty) {
+        // Re verify Auth email
+        if (provider == 'google.com') {
+          await auth.signInWithGoogle();
+          await auth.deleteAccount();
+          KFullScreenLoader.stopLoading();
+          Get.offAll(() => const LoginScreen());
+        } else if (provider == 'password') {
+          KFullScreenLoader.stopLoading();
+          Get.to(() => const ReAuthLoginForm());
+        }
+      }
+    } catch (e) {
+      KFullScreenLoader.stopLoading();
+      KLoaders.warningSnackBar(title: 'Oh Snap!', message: e.toString());
+    }
+  }
+
+  // Re-Authenticate before deleting
+  Future<void> reAuthenticateEmailAndPasswordUser() async {
+    try {
+      KFullScreenLoader.openLoadingDialog(
+        'Processing',
+        KImages.loadingAnimation,
+      );
+
+      // check internet
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        KFullScreenLoader.stopLoading();
+        return;
+      }
+
+      if (!reAuthFormKey.currentState!.validate()) {
+        KFullScreenLoader.stopLoading();
+        return;
+      }
+
+      await AuthenticationRepository.instance
+          .reAuthenticateWithEmailAndPassword(
+            verifyEmail.text.trim(),
+            verifyPassword.text.trim(),
+          );
+      await AuthenticationRepository.instance.deleteAccount();
+      KFullScreenLoader.stopLoading();
+      Get.offAll(() => const LoginScreen());
+    } catch (e) {
+      KFullScreenLoader.stopLoading();
+      KLoaders.warningSnackBar(title: 'Oh Snap!', message: e.toString());
     }
   }
 }
