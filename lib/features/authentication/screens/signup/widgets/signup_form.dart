@@ -12,7 +12,7 @@ class KSignupForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SignupController());
+    final controller = Get.find<SignupController>();
     final dark = KHelperFunctions.isDarkMode(context);
     return Form(
       key: controller.signupFormKey,

@@ -4,6 +4,7 @@ import 'package:crowncreation/utils/constants/colors.dart';
 import 'package:crowncreation/utils/constants/image_strings.dart';
 import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:iconsax/iconsax.dart';
 
 class KUserProfileTile extends StatelessWidget {
@@ -15,29 +16,33 @@ class KUserProfileTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = UserController.instance;
     final dark = KHelperFunctions.isDarkMode(context);
-    return ListTile(
-      leading: const KCircularImage(
-        image: KImages.user,
-        width: 50,
-        height: 50,
-        padding: 0,
-      ),
-      title: Text(
-        controller.user.value.fullName,
-        style: Theme.of(context).textTheme.headlineSmall!.apply(
-          color: dark ? KColors.dark : KColors.dark,
+    return Obx(() {
+      final imageUrl = controller.user.value.profilePicture;
+      return ListTile(
+        leading: KCircularImage(
+          image: imageUrl.isNotEmpty ? imageUrl : KImages.user,
+          isNetworkImage: imageUrl.isNotEmpty,
+          width: 50,
+          height: 50,
+          padding: 0,
         ),
-      ),
-      subtitle: Text(
-        controller.user.value.email,
-        style: Theme.of(context).textTheme.bodyMedium!.apply(
-          color: dark ? KColors.dark : KColors.dark,
+        title: Text(
+          controller.user.value.fullName,
+          style: Theme.of(context).textTheme.headlineSmall!.apply(
+            color: dark ? KColors.dark : KColors.dark,
+          ),
         ),
-      ),
-      trailing: IconButton(
-        onPressed: onPressed,
-        icon: Icon(Iconsax.edit, color: dark ? KColors.dark : KColors.dark),
-      ),
-    );
+        subtitle: Text(
+          controller.user.value.email,
+          style: Theme.of(context).textTheme.bodyMedium!.apply(
+            color: dark ? KColors.dark : KColors.dark,
+          ),
+        ),
+        trailing: IconButton(
+          onPressed: onPressed,
+          icon: Icon(Iconsax.edit, color: dark ? KColors.dark : KColors.dark),
+        ),
+      );
+    });
   }
 }

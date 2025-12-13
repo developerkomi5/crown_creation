@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crowncreation/utils/constants/colors.dart';
+import 'package:crowncreation/utils/constants/shimmer.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -38,14 +40,26 @@ class KCircularImage extends StatelessWidget {
                 : KColors.white),
         borderRadius: BorderRadius.circular(100),
       ),
-      child: Center(
-        child: Image(
-          fit: fit,
-          image:
+      child: ClipRRect(
+        borderRadius: BorderRadiusGeometry.circular(100),
+        child: Center(
+          child:
               isNetworkImage
-                  ? NetworkImage(image)
-                  : AssetImage(image) as ImageProvider,
-          color: overlayColor,
+                  ? CachedNetworkImage(
+                    imageUrl: image,
+                    fit: fit,
+                    color: overlayColor,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) =>
+                            const KShimmerEffect(width: 55, height: 55),
+                    errorWidget:
+                        (context, url, error) => const Icon(Icons.error),
+                  )
+                  : Image(
+                    fit: fit,
+                    image: AssetImage(image),
+                    color: overlayColor,
+                  ),
         ),
       ),
     );

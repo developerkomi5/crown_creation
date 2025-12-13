@@ -5,6 +5,7 @@ import 'package:crowncreation/features/personalization/models/user_model.dart';
 import 'package:crowncreation/features/personalization/screens/profile/widgets/re_authenticate_user_login_form.dart';
 import 'package:crowncreation/utils/constants/image_strings.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
+import 'package:crowncreation/utils/helpers/image_upload_service.dart';
 import 'package:crowncreation/utils/helpers/network_manager.dart';
 import 'package:crowncreation/utils/popups/full_screen_loader.dart';
 import 'package:crowncreation/utils/popups/loaders.dart';
@@ -19,6 +20,7 @@ class UserController extends GetxController {
   Rx<UserModel> user = UserModel.empty().obs;
 
   final hidePassword = false.obs;
+  final imageUploading = false.obs;
   final verifyEmail = TextEditingController();
   final verifyPassword = TextEditingController();
   final userRepository = Get.put(UserRepository());
@@ -46,28 +48,34 @@ class UserController extends GetxController {
   // Save user record from any registration provider
   Future<void> saveUserRecord(UserCredential? userCredentials) async {
     try {
-      if (userCredentials != null) {
-        // Convert nameto first and last name
-        final nameParts = UserModel.nameParts(
-          userCredentials.user!.displayName ?? '',
-        );
-        final username = UserModel.generateUsername(
-          userCredentials.user!.displayName ?? '',
-        );
+      // firs update the Rx user and then check if user data is already stored. if not store new data
+      await fetchUserRecord();
 
-        // Map data
-        final user = UserModel(
-          id: userCredentials.user!.uid,
-          firstName: nameParts[0],
-          lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : ' ',
-          username: username,
-          email: userCredentials.user!.email ?? '',
-          phoneNumber: userCredentials.user!.phoneNumber ?? '',
-          profilePicture: userCredentials.user!.photoURL ?? '',
-        );
+      if (user.value.id.isEmpty) {
+        if (userCredentials != null) {
+          // Convert nameto first and last name
+          final nameParts = UserModel.nameParts(
+            userCredentials.user!.displayName ?? '',
+          );
+          final username = UserModel.generateUsername(
+            userCredentials.user!.displayName ?? '',
+          );
 
-        // save user data
-        await userRepository.saveUserRecord(user);
+          // Map data
+          final user = UserModel(
+            id: userCredentials.user!.uid,
+            firstName: nameParts[0],
+            lastName:
+                nameParts.length > 1 ? nameParts.sublist(1).join(' ') : ' ',
+            username: username,
+            email: userCredentials.user!.email ?? '',
+            phoneNumber: userCredentials.user!.phoneNumber ?? '',
+            profilePicture: userCredentials.user!.photoURL ?? '',
+          );
+
+          // save user data
+          await userRepository.saveUserRecord(user);
+        }
       }
     } catch (e) {
       KLoaders.warningSnackBar(
@@ -164,6 +172,35 @@ class UserController extends GetxController {
     } catch (e) {
       KFullScreenLoader.stopLoading();
       KLoaders.warningSnackBar(title: 'Oh Snap!', message: e.toString());
+    }
+  }
+
+  // upload profile picture
+  uploadUserProfilePicture() async {
+    try {
+      final imageUrl = await ImageUploadService.instance.pickCompressAndUpload(
+        type: ImageType.profile,
+        storagePath: 'Users/Images/Profile',
+      );
+      imageUploading.value = true;
+      if (imageUrl == null) return;
+      // Update Firestore record
+      await userRepository.updateSingleField({'ProfilePicture': imageUrl});
+
+      // Update local Rx user
+      user.value.profilePicture = imageUrl;
+      user.refresh();
+      KLoaders.successSnackBar(
+        title: 'Congratulations..!',
+        message: 'Your Profile Image has been updated!',
+      );
+    } catch (e) {
+      KLoaders.errorSnackBar(
+        title: 'Oh Snap!',
+        message: 'Something went wrong: $e',
+      );
+    } finally {
+      imageUploading.value = false;
     }
   }
 }

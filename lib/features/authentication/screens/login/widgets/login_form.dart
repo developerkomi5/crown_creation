@@ -14,7 +14,7 @@ class KLoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LoginController());
+    final controller = Get.find<LoginController>();
     final dark = KHelperFunctions.isDarkMode(context);
     return Form(
       key: controller.loginFormKey,

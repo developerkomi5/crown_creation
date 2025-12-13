@@ -1,6 +1,5 @@
 import 'package:crowncreation/data/repositories/user/user_repository.dart';
 import 'package:crowncreation/features/personalization/controllers/user_controller.dart';
-import 'package:crowncreation/features/personalization/screens/profile/profile.dart';
 import 'package:crowncreation/utils/constants/image_strings.dart';
 import 'package:crowncreation/utils/helpers/network_manager.dart';
 import 'package:crowncreation/utils/popups/full_screen_loader.dart';
@@ -72,7 +71,10 @@ class UpdateNameController extends GetxController {
       );
 
       // Move to previous screen
-      Get.offAll(() => const ProfileScreen());
+      Future.delayed(
+        const Duration(milliseconds: 300),
+        () => Get.back(closeOverlays: true),
+      );
     } catch (e) {
       KFullScreenLoader.stopLoading();
       KLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());

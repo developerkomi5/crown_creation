@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:crowncreation/data/repositories/user/user_repository.dart';
 import 'package:crowncreation/features/authentication/screens/login/login.dart';
 import 'package:crowncreation/features/authentication/screens/onboarding/onboarding.dart';
@@ -8,12 +10,14 @@ import 'package:crowncreation/utils/exceptions/firebase_exceptions.dart';
 import 'package:crowncreation/utils/exceptions/format_exceptions.dart';
 import 'package:crowncreation/utils/exceptions/platform_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -231,8 +235,24 @@ class AuthenticationRepository extends GetxController {
     try {
       await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
       await _auth.currentUser?.delete();
-    } on FirebaseAuthException catch (e) {
-      throw KFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw KFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const KFormatException();
+    } on PlatformException catch (e) {
+      throw KPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again.';
+    }
+  }
+
+  // upload any image
+  Future<String> uploadImage(String path, XFile image) async {
+    try {
+      final ref = FirebaseStorage.instance.ref(path).child(image.name);
+      await ref.putFile(File(image.path));
+      final url = await ref.getDownloadURL();
+      return url;
     } on FirebaseException catch (e) {
       throw KFirebaseException(e.code).message;
     } on FormatException catch (_) {

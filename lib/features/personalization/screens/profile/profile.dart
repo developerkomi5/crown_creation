@@ -5,10 +5,12 @@ import 'package:crowncreation/features/personalization/controllers/user_controll
 import 'package:crowncreation/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:crowncreation/features/personalization/screens/profile/widgets/change_name.dart';
 import 'package:crowncreation/utils/constants/image_strings.dart';
+import 'package:crowncreation/utils/constants/shimmer.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/state_manager.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -30,13 +32,25 @@ class ProfileScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    const KCircularImage(
-                      image: KImages.user,
-                      width: 80,
-                      height: 80,
-                    ),
+                    Obx(() {
+                      final networkImage = controller.user.value.profilePicture;
+                      final image =
+                          networkImage.isNotEmpty ? networkImage : KImages.user;
+                      return controller.imageUploading.value
+                          ? const KShimmerEffect(
+                            width: 80,
+                            height: 80,
+                            radius: 80,
+                          )
+                          : KCircularImage(
+                            image: image,
+                            width: 80,
+                            height: 80,
+                            isNetworkImage: networkImage.isNotEmpty,
+                          );
+                    }),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => controller.uploadUserProfilePicture(),
                       child: const Text('Change Profile Picture'),
                     ),
                   ],
