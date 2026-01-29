@@ -2,7 +2,7 @@ import 'package:crowncreation/common/widgets/appbar/appbar.dart';
 import 'package:crowncreation/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:crowncreation/features/personalization/controllers/user_controller.dart';
 import 'package:crowncreation/utils/constants/colors.dart';
-import 'package:crowncreation/utils/constants/shimmer.dart';
+import 'package:crowncreation/common/widgets/shimmer/shimmer.dart';
 import 'package:crowncreation/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -5,7 +5,7 @@ import 'package:crowncreation/features/personalization/controllers/user_controll
 import 'package:crowncreation/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:crowncreation/features/personalization/screens/profile/widgets/change_name.dart';
 import 'package:crowncreation/utils/constants/image_strings.dart';
-import 'package:crowncreation/utils/constants/shimmer.dart';
+import 'package:crowncreation/common/widgets/shimmer/shimmer.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';

@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crowncreation/utils/constants/colors.dart';
-import 'package:crowncreation/utils/constants/shimmer.dart';
+import 'package:crowncreation/common/widgets/shimmer/shimmer.dart';
 import 'package:crowncreation/utils/constants/sizes.dart';
 import 'package:crowncreation/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class KCircularImage extends StatelessWidget {
     this.overlayColor,
     this.backgroundColor,
     required this.image,
-    this.isNetworkImage = false,
+    this.isNetworkImage = true,
   });
 
   final BoxFit? fit;
